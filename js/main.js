@@ -415,8 +415,8 @@ var onloadCallback = function() {
 			rules: {
 				form: {required: true},
 				phone: {required: true},
-				name: {required: false},
-				mail: {required: false}
+				name: {required: true},
+				mail: {required: true}
 			},
 			messages: {},
 			errorPlacement: function (error, element) {},

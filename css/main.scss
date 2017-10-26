@@ -620,7 +620,7 @@ $t: .25s;
 }
 .footer{
 	background-color: #f4f4f4;
-	padding: 80px 0 20px;
+	padding: 80px 0 17px;
 	position: relative;
 	margin-top: auto;
 	&__info{
@@ -674,6 +674,35 @@ $t: .25s;
 				}
 			}
 		}
+		&_social{
+			@include flex(c,c);
+			margin-top: 10px;
+			a{
+				font-family: Vladivostok;
+				line-height: 1.38;
+				font-weight: 400;
+				color: rgba(39, 39, 39, 0.2);
+				font-size: 1rem;
+				letter-spacing: 0.005rem;
+				@include flex(fs,c);
+				transition: $t;
+				&:hover{
+					color: #272727;
+					path{
+						fill: $b;
+					}
+				}
+				&:not(:last-of-type){
+					margin-right: 35px;
+				}
+				path{
+					transition: $t;
+				}
+				i{
+					margin-right: 10px;
+				}
+			}
+		}
 	}
 	&__nav{
 		@include flex(sb,a);
@@ -682,8 +711,20 @@ $t: .25s;
 			color: #c7c7c7;
 			font-size: 0.875rem;
 			text-transform: uppercase;
-			@include h_center($h:2px,$c:#fff);
+			&:hover{
+				color: $g;
+			}
+			@include h_center($h:2px,$c:$b);
 		}
+	}
+	h6{
+		text-align: center;
+		color: #bebebe;
+		font-size: 0.75rem;
+		letter-spacing: 0.004rem;
+		padding-top: 15px;
+		margin-top: 10px;
+		border-top: 0.125rem solid rgba(232, 232, 232, 0.6);
 	}
 }
 
@@ -2025,10 +2066,7 @@ $t: .25s;
 		background-color: #fff;
 		&__nav{
 			a{
-				&:hover{
-					color: $g;
-				}
-				@include h_center($h:2px,$c:$b);
+
 			}
 		}
 	}
