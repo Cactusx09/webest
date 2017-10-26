@@ -238,60 +238,60 @@ $(document).ready(function(){
 	//mask
 	$('input[name="phone"]').mask("+7 (999) 999-99-99");
 	// validate
-	$("._validate").each(function () {
-		var it = $(this);
-		it.validate({
-			rules: {
-				form: {required: true},
-				phone: {required: true},
-				name: {required: false},
-				mail: {required: false}
-			},
-			messages: {},
-			errorPlacement: function (error, element) {},
-			submitHandler: function (form) {
-				var data = new FormData(it[0]);
-				$.ajax({
-					url: 'mail.php',
-					type: 'POST',
-					data: data,
-					cache: false,
-					processData: false,
-					contentType: false,
-					success: function( respond, textStatus, jqXHR ){
-						$('.popup').removeClass('_visible');
-						var name = 'thnx'
-						popup = $('.popup_'+name),
-							popup_h = popup.outerHeight(),
-							popup_w = popup.outerWidth(),
-							h = $(window).height(),
-							px = window.pageYOffset + h/2 - popup_h/2;
-						popup.css({
-							'top': px+'px',
-							'margin-left': '-'+ popup_w/2 +'px',
-						});
-						$('.popup.popup_'+name+', .overlay').addClass('_visible');
-						setTimeout(function () {
-							if ($('.popup_thnx').hasClass('_visible')) {
-								$('.popup_thnx, .overlay').removeClass('_visible');
-							}
-						}, 2000);
-						$("form").trigger( 'reset' );
-					},
-					error: function( jqXHR, textStatus, errorThrown ){
-						console.log('ОШИБКИ AJAX запроса: ' + textStatus );
-					}
-				});
-			},
-			success: function () {},
-			highlight: function (element, errorClass) {
-				$(element).addClass('_error');
-			},
-			unhighlight: function (element, errorClass, validClass) {
-				$(element).removeClass('_error');
-			}
-		});
-	});
+//	$("._validate").each(function () {
+//		var it = $(this);
+//		it.validate({
+//			rules: {
+//				form: {required: true},
+//				phone: {required: true},
+//				name: {required: false},
+//				mail: {required: false}
+//			},
+//			messages: {},
+//			errorPlacement: function (error, element) {},
+//			submitHandler: function (form) {
+//				var data = new FormData(it[0]);
+//				$.ajax({
+//					url: 'mail.php',
+//					type: 'POST',
+//					data: data,
+//					cache: false,
+//					processData: false,
+//					contentType: false,
+//					success: function( respond, textStatus, jqXHR ){
+//						$('.popup').removeClass('_visible');
+//						var name = 'thnx'
+//						popup = $('.popup_'+name),
+//							popup_h = popup.outerHeight(),
+//							popup_w = popup.outerWidth(),
+//							h = $(window).height(),
+//							px = window.pageYOffset + h/2 - popup_h/2;
+//						popup.css({
+//							'top': px+'px',
+//							'margin-left': '-'+ popup_w/2 +'px',
+//						});
+//						$('.popup.popup_'+name+', .overlay').addClass('_visible');
+//						setTimeout(function () {
+//							if ($('.popup_thnx').hasClass('_visible')) {
+//								$('.popup_thnx, .overlay').removeClass('_visible');
+//							}
+//						}, 2000);
+//						$("form").trigger( 'reset' );
+//					},
+//					error: function( jqXHR, textStatus, errorThrown ){
+//						console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+//					}
+//				});
+//			},
+//			success: function () {},
+//			highlight: function (element, errorClass) {
+//				$(element).addClass('_error');
+//			},
+//			unhighlight: function (element, errorClass, validClass) {
+//				$(element).removeClass('_error');
+//			}
+//		});
+//	});
 
 
 	$(window).resize(function(){
@@ -367,3 +367,70 @@ $(window).on('load',function(){
 		});
 	},7000);
 });
+
+
+var onloadCallback = function() {
+	$("._validate").each(function () {
+		var it = $(this),
+			btn = it.find('.g-recaptcha');
+		var gcap = grecaptcha.render($(btn).attr("id"), {
+			'sitekey' : '6LcmATYUAAAAAHLvWTK9aZ0vQkiavSqOT3zIje5Q',
+			"size": "invisible",
+			'callback' : function(token){
+				var data = new FormData(it[0]);
+				$.ajax({
+					url: 'mail.php',
+					type: 'POST',
+					data: data,
+					cache: false,
+					processData: false,
+					contentType: false,
+					success: function( respond, textStatus, jqXHR ){
+						$('.popup').removeClass('_visible');
+						var name = 'thnx'
+						popup = $('.popup_'+name),
+							popup_h = popup.outerHeight(),
+							popup_w = popup.outerWidth(),
+							h = $(window).height(),
+							px = window.pageYOffset + h/2 - popup_h/2;
+						popup.css({
+							'top': px+'px',
+							'margin-left': '-'+ popup_w/2 +'px',
+						});
+						$('.popup.popup_'+name+', .overlay').addClass('_visible');
+						setTimeout(function () {
+							if ($('.popup_thnx').hasClass('_visible')) {
+								$('.popup_thnx, .overlay').removeClass('_visible');
+							}
+						}, 2000);
+						$("form").trigger( 'reset' );
+					},
+					error: function( jqXHR, textStatus, errorThrown ){
+						console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+					}
+				});
+			}
+		});
+		it.validate({
+			rules: {
+				form: {required: true},
+				phone: {required: true},
+				name: {required: false},
+				mail: {required: false}
+			},
+			messages: {},
+			errorPlacement: function (error, element) {},
+			submitHandler: function (form) {
+				grecaptcha.execute(gcap);
+			},
+			success: function () {
+			},
+			highlight: function (element, errorClass) {
+				$(element).addClass('_error');
+			},
+			unhighlight: function (element, errorClass, validClass) {
+				$(element).removeClass('_error');
+			}
+		});
+	});
+};

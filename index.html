@@ -555,6 +555,7 @@
 							<input class="g_input" type="text" name="phone" placeholder="ТЕЛЕФОН">
 							<input class="g_input" type="email" name="mail" placeholder="EMAIL">
 							<button type="submit"><span class="g_btn"><span>заказать</span></span></button>
+							<button class="g-recaptcha" id="captcha2"></button>
         				</form>
         			</div>
         		</div>
@@ -593,8 +594,10 @@
 			<form action="/" class="popup__form _validate">
 				<input type="hidden" name="form" value="Заказать звонок">
 				<input class="g_input" type="text" name="name" placeholder="Имя">
+				<input class="g_input" type="email" name="mail" placeholder="Email">
 				<input class="g_input" type="text" name="phone" placeholder="Номер телефона">
 				<button type="submit"><span class="g_btn"><span>Заказать звонок</span></span></button>
+				<button class="g-recaptcha" id="captcha1"></button>
 			</form>
 		</div>
 		<div class="popup popup_thnx">
@@ -609,6 +612,12 @@
         <script src="vendor/jquery.maskedinput.min.js"></script>
         <script src="vendor/swiper/js/swiper.jquery.min.js"></script>
         <script src="js/main.js"></script>
+
+		<script>
+
+		</script>
+		<script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit'></script>
+
 		<script src="_trg.js"></script>
     </body>
 </html>
