@@ -89,7 +89,7 @@ $(document).ready(function(){
 				slides: slider,
 				transition: 'blur',
 				autoplay: false,
-				overlay: 'vendor/vegas/overlays/08.png',
+//				overlay: 'vendor/vegas/overlays/08.png',
 				walk: function (index, slideSettings) {
 					var item = el.closest('.s_portfolio__item'),
 						pager = item.find('.s_portfolio__info_pager span').eq(index).addClass('_current').siblings().removeClass('_current');
